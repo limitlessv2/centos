@@ -64,8 +64,23 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
+   config.vm.provision "shell", inline: <<-SHELL
+     sudo apt-get update
   #   sudo apt-get install -y apache2
-  # SHELL
+     sudo apt-get update
+  #   sudo apt-get install -y apache2
+     #jre
+     cd ~
+     wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jre-7u79-linux-x64.rpm" 
+     sudo yum localinstall jre-7u79-linux-x64.rpm -y
+     rm ~/jre-7u79-linux-x64.rpm
+
+     #jdk
+     cd ~
+     wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.rpm" 
+     sudo yum localinstall jdk-7u79-linux-x64.rpm -y
+     rm ~/jdk-7u79-linux-x64.rpm
+     export JAVA_HOME=/usr/java/jdk1.8.0_60/jre
+     sudo sh -c "echo export JAVA_HOME=/usr/java/jdk1.8.0_60/jre >> /etc/environment"
+   SHELL
 end
